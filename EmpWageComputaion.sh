@@ -13,14 +13,10 @@ totalEmpHrs=0
 totalWorkingDays=0
 
 
-#Calculating Wage till Number
+#Reactor the code
+function getWorkingHours(){
 
-while [[ $totalEmphrs -lt $maxHrsInMonth && $totalWorkingDays -lt $numOfWorkingDays ]]
-do
-	((totalWorkingDays++))
-
-	empCheck=$((RANDOM%3))
-
+	local empCheck=$1
 	case $empCheck in
 		$isFullTime)
 			empHrs=8
@@ -34,8 +30,16 @@ do
 			;;
 
 	esac
+	echo $empHrs
+}
 
-	totalEmpHrs=$(($totalEmpHrs+empHrs))
+totalEmpHrs=$(($totalEmpHrs+empHrs))
 
+while [[ $totalEmphrs -lt $maxHrsInMonth && $totalWorkingDays -lt $numOfWorkingDays ]]
+do
+	((totalWorkingDays++))
+	empCheck=$((RANDOM%3))
+	empHrs="$( getWorkingHours $empCheck )"
+	totalEmpHrs=$(( $totalEmpHrs + $empHrs ))
 done 
 totalSalary=$(($totalEmpHrs*$empRatePerHrs))
