@@ -7,10 +7,17 @@ isFullTime=2
 totalSalary=0
 empRatePerHrs=20;
 numOfWorkingDays=20
+maxHrsInMonth=10
+
+totalEmpHrs=0
+totalWorkingDays=0
 
 
-for (( day=1; day<=$numOfWorkingDays; day++ ))
+#Calculating Wage till Number
+
+while [[ $totalEmphrs -lt $maxHrsInMonth && $totalWorkingDays -lt $numOfWorkingDays ]]
 do
+	((totalWorkingDays++))
 
 	empCheck=$((RANDOM%3))
 
@@ -28,7 +35,7 @@ do
 
 	esac
 
-	salary=$(($empHrs*$empRatePerHrs))
-	totalSalary=$(($totalSalary + $salary))
+	totalEmpHrs=$(($totalEmpHrs+empHrs))
 
 done 
+totalSalary=$(($totalEmpHrs*$empRatePerHrs))
