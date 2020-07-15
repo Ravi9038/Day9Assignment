@@ -10,5 +10,9 @@ empCheck=$(( RANDOM%2 ))
 empHrs=8;
 empHrsPerRate=20;
 
+if [ $((RANDOM%2)) -eq 0 ]
+then
 
- 
+	partTimeWage=$(( $empHrs*$empHrsPerRate));
+
+fi	
