@@ -2,26 +2,33 @@
 
 echo "Welcome to Employee Wage Computation."
 
-isPartTime=1;
-isFullTime=2;
-
+isPartTime=1
+isFullTime=2
+totalSalary=0
 empRatePerHrs=20;
-empCheck=$((RANDOM%3))
+numOfWorkingDays=20
 
-case $empCheck in
-	$isFullTime)
-		empHrs=8
-		;;
 
-	$isPartTime)
-		empHrs=4
-		;;
-	*)
-		empHrs=0
-		;;
+for (( day=1; day<=$numOfWorkingDays; day++ ))
+do
 
-esac
+	empCheck=$((RANDOM%3))
 
-salary=$(($empHrs*$empRatePerHrs))
+	case $empCheck in
+		$isFullTime)
+			empHrs=8
+			;;
 
-echo $salary
+		$isPartTime)
+			empHrs=4
+			;;
+		*)
+			empHrs=0
+			;;
+
+	esac
+
+	salary=$(($empHrs*$empRatePerHrs))
+	totalSalary=$(($totalSalary + $salary))
+
+done 
